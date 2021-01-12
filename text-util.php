@@ -25,7 +25,7 @@ if (count($argv) == 3) {
             countAverageLineCount($csv->getUsers(), $files);
             break;
         case 'replaceDates':
-            //TODO Функция replaceDates
+            $files->replaceDates(basicFormat: 'd/m/y', destinationFormat: 'm-d-y');
             break;
         default:
             exit('Невалидный второй аргумент: ' . $argv[2] . ' Используйте countAverageLineCount/replaceDates');
@@ -36,6 +36,7 @@ if (count($argv) == 3) {
 
 function countAverageLineCount($users, Files $files)
 {
+    echo "\nСреднее количество строк в тексте для каждого пользователя\n\n";
     foreach ($users as $user) {
         echo $user['name'] . ': ' . $files->averageLineCount($user['id']) . "\n";
     }
