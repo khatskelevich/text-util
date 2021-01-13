@@ -6,18 +6,11 @@ spl_autoload_register(function ($class) {
 
 try {
     if (count($argv) == 3) {
-        switch ($argv[1]) {
-            case 'comma':
-            case ',':
-                $csv = new ParseCSV('people.csv', ',');
-                break;
-            case 'semicolon':
-            case ':':
-                $csv = new ParseCSV('people.csv', ':');
-                break;
-            default:
-                throw new Exception('Невалидный первый аргумент. Используйте comma/semicolon');
-        }
+        $csv = match ($argv[1]) {
+            'comma', ',' => new ParseCSV('people.csv', ','),
+            'semicolon', ':' => new ParseCSV('people.csv', ':'),
+            default => throw new Exception('Невалидный первый аргумент. Используйте comma/semicolon'),
+        };
 
         $files = new Files('texts');
 
