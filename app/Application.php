@@ -5,7 +5,7 @@ class Application
 {
     private $method;
     private $delimiter;
-    private $dirname = 'texts';
+    private string $dirname = 'texts';
 
     public function __construct($argv)
     {
